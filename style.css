@@ -1,0 +1,11 @@
+#compScore, #playerScore{
+    border: 2px solid rgb(44, 26, 26);
+    display: inline-block;
+    padding: 10px;
+    margin: 25px;
+    border-radius: 30px;
+}
+#resultText{
+    display: inline-block;
+    margin: 30px;
+}

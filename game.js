@@ -5,72 +5,59 @@ function computerplay(){
 }
 
 
-function playRound(playerSelection, computerSelection){
+function playRound(playerSelection){
+    result.textContent = "";
+    let computerSelection = computerplay();
+
     if (playerSelection == "rock") {
         if (computerSelection == "paper") {
-            computerScore++;
-            return "you loose! paper beats rock";
-        } 
-        if (computerSelection == "rock") {
-            return "A Draw";
+            cScore.textContent++;
         } 
         if (computerSelection == "scissors") {
-            playerScore++;
-            return "you win! rock beats scissors";
+            pScore.textContent++;
         } 
     } 
         
-    if (playerSelection == "paper") {
-        if (computerSelection == "paper") {
-            return "A Draw";
-        } 
+    if (playerSelection == "paper") { 
         if (computerSelection == "rock") {
-            playerScore++;
-            return "you win! paper beats rock";
+            pScore.textContent++;
         } 
         if (computerSelection == "scissors") {
-            computerScore++;
-            return "you loose! scissors beats paper";
+            cScore.textContent++;
         } 
     } 
 
     if (playerSelection == "scissors") {
-        if (computerSelection == "paper") {
-            playerScore++;
-            return "you win! scissors beats paper";
-        } 
         if (computerSelection == "rock") {
-            computerScore++;
-            return "you loose! rock beats scissors";
+            cScore.textContent++;
         } 
         if (computerSelection == "paper") {
-            return "A Draw";
+            pScore.textContent++;
         } 
     } 
+
+    if ((cScore.textContent >= 5) || (pScore.textContent >= 5)) {
+        if (cScore.textContent >= 5) {
+            cScore.textContent = 0;
+            pScore.textContent = 0;
+            result.textContent = "computer wins";
+        } else {
+            cScore.textContent = 0;
+            pScore.textContent = 0;
+            result.textContent = "player wins";
+        }
+    }
+
+    cScore.textContent = cScore.textContent;
+    pScore.textContent = pScore.textContent;
 };
-
-let userInput;
-let playerScore = 0;
-let computerScore = 0;
-
-function game(){
-    for (let i = 0; i < 5; i++) {
-        let computerSelection = computerplay();
-        let playerSelection = prompt("pick rock, paper or scissors", userInput);
-        console.log(playRound(playerSelection, computerSelection));
-        console.log(playerScore, computerScore);
-    }
-
-    if (playerScore > computerScore) {
-        console.log("you win");
-        
-    } else if(computerScore > playerScore){
-        console.log("you loose");
-    }
-    else{
-        console.log("a draw");
-    }
-
-}
-
-game();
+let result = document.getElementById("resultText");
+let cScore = document.getElementById("compScore");
+let pScore = document.getElementById("playerScore");
+let buttons = document.querySelectorAll("button");
+    
+buttons.forEach(button =>{
+    button.addEventListener('click', function(){
+        playRound(button.value)
+    })
+})
